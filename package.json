@@ -1,0 +1,29 @@
+{
+  "name": "how-any",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "bin": {
+    "how-any": "./dist/command.cjs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup"
+  },
+  "dependencies": {
+    "chalk": "4",
+    "commander": "^13.0.0",
+    "glob": "^11.0.1",
+    "ora": "^8.1.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.14.0",
+    "@types/node": "^22.10.7",
+    "eslint": "^9.18.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  }
+}
