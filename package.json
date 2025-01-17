@@ -7,16 +7,17 @@
   "license": "ISC",
   "keywords": [],
   "bin": {
-    "how-any": "./dist/command.cjs"
+    "how-any": "./dist/cli.cjs"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup"
   },
   "dependencies": {
+    "@swc/core": "1.10.7",
     "chalk": "4",
     "commander": "^13.0.0",
-    "glob": "^11.0.1",
+    "fast-glob": "^3.3.3",
     "ora": "^8.1.1"
   },
   "devDependencies": {
