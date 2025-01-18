@@ -36,4 +36,4 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - run: pnpm install
       - run: pnpm lint
-      - run: pnpm run build --if-present
+      - run: pnpm run build
