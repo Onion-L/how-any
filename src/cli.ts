@@ -29,9 +29,10 @@ program
       }
     }
 
-    const average = `${Math.round(total / count)}%` || 'None'
+    const average = count > 0 ? `${Math.round(total / count)}%` : 'None'
+    const result = `${average}`
     const message = boxen(
-      `${chalk.yellow.bold(average)} of type annotations are ${chalk.red('any')}\n`
+      `${chalk.yellow.bold(result)} of type annotations are ${chalk.red('any')}\n`
       + `${chalk.dim(`Analyzed ${files.length} files, ${count} ${count > 1 ? 'files' : 'file'} with any type`)}`,
       {
         padding: 1,
@@ -40,6 +41,7 @@ program
         titleAlignment: 'left',
       }
     )
+
     console.log(`\n${message}`)
   })
 

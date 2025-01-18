@@ -10,7 +10,9 @@
     "how-any": "./dist/cli.cjs"
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "lint": "eslint ."
+
   },
   "dependencies": {
     "@swc/core": "1.10.7",
