@@ -10,11 +10,11 @@
     "how-any": "./dist/cli.cjs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup"
   },
   "dependencies": {
     "@swc/core": "1.10.7",
+    "boxen": "^8.0.1",
     "chalk": "4",
     "commander": "^13.0.0",
     "fast-glob": "^3.3.3",

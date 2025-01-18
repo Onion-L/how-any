@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-
 import type { TsType, TsTypeAnnotation } from '@swc/core'
 import fs from 'node:fs'
 import process from 'node:process'
 import { parse } from '@swc/core'
 import { Visitor } from '@swc/core/Visitor'
+import chalk from 'chalk'
 import { Command } from 'commander'
 import { getTsFiles } from './fg'
 
@@ -17,11 +17,30 @@ program
   // TODO .option('-t, --type <type>', 'Input project type')
   .action(async (options) => {
     const files = await getTsFiles(options.dir, options.type)
+    const { default: boxen } = await import('boxen')
+    let total = 0
+    let count = 0
+
     for (const file of files) {
       const results = await getAnyTypeRate(file)
-      // TODO Better result display method
-      console.log(file, `any type rate: ${results}%`)
+      if (results !== 0) {
+        total += results
+        count++
+      }
     }
+
+    const average = `${Math.round(total / count)}%` || 'None'
+    const message = boxen(
+      `${chalk.yellow.bold(average)} of type annotations are ${chalk.red('any')}\n`
+      + `${chalk.dim(`Analyzed ${files.length} files, ${count} ${count > 1 ? 'files' : 'file'} with any type`)}`,
+      {
+        padding: 1,
+        borderStyle: 'round',
+        title: chalk.gray.bold('How Any 🤔'),
+        titleAlignment: 'left',
+      }
+    )
+    console.log(`\n${message}`)
   })
 
 program.parse(process.argv)
@@ -57,7 +76,7 @@ export async function getAnyTypeRate(file: string): Promise<number> {
   const content = fs.readFileSync(file, 'utf-8')
   const ast = await parse(content, {
     syntax: 'typescript',
-    tsx: false,
+    tsx: true,
   })
 
   const visitor = new AnyTypeVisitor()
