@@ -27,6 +27,10 @@ program
         total += results
         count++
       }
+      const icon = results === 0 ? '✅' : results > 50 ? '🚨' : '🚧'
+      const percentage = chalk.bold(results === 0 ? chalk.green(`${results}%`) : results > 50 ? chalk.red(`${results}%`) : chalk.yellow(`${results}%`))
+      const relativePath = file.split('/').slice(-2).join('/')
+      console.log(`${icon} ${chalk.blue(relativePath.padEnd(30))} ${percentage}`)
     }
 
     const average = count > 0 ? `${Math.round(total / count)}%` : 'None'
