@@ -12,15 +12,13 @@
   "scripts": {
     "build": "tsup",
     "lint": "eslint ."
-
   },
   "dependencies": {
     "@swc/core": "1.10.7",
     "boxen": "^8.0.1",
     "chalk": "4",
     "commander": "^13.0.0",
-    "fast-glob": "^3.3.3",
-    "ora": "^8.1.1"
+    "fast-glob": "^3.3.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.14.0",
