@@ -11,9 +11,6 @@ importers:
       '@swc/core':
         specifier: 1.10.7
         version: 1.10.7
-      '@vue/compiler-sfc':
-        specifier: ^3.5.13
-        version: 3.5.13
       boxen:
         specifier: ^8.0.1
         version: 8.0.1

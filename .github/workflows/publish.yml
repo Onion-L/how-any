@@ -50,15 +50,7 @@ jobs:
           prerelease: false
           generate_release_notes: true
 
-      - name: Copy package.json to dist
-        run: |
-          cp package.json dist/
-          VERSION=${GITHUB_REF#refs/tags/v}
-          sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" dist/package.json
-          cp README.md dist/ || true
-
       - name: Publish to NPM
-        working-directory: dist
         run: pnpm publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -67,4 +59,4 @@ jobs:
         run: |
           echo "🎉 Published to NPM successfully"
           echo "Version: ${{ steps.get_version.outputs.VERSION }}"
-          echo "Package: $(node -p "require('./dist/package.json').name")"
+          echo "Package: $(node -p "require('./package.json').name")"
