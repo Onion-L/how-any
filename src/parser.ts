@@ -1,6 +1,6 @@
 import { compileScript, parse } from '@vue/compiler-sfc'
 
-export async function parseSfc(content: string): Promise<string> {
+export async function vueParser(content: string): Promise<string> {
   const { descriptor } = parse(content)
 
   if (descriptor.script || descriptor.scriptSetup) {
@@ -11,5 +11,9 @@ export async function parseSfc(content: string): Promise<string> {
     return scriptResult.content
   }
 
+  return content
+}
+
+export async function svelteParser(content: string): Promise<string> {
   return content
 }

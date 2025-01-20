@@ -9,6 +9,10 @@
   "bin": {
     "how-any": "./dist/cli.cjs"
   },
+  "files": [
+    "README.md",
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "lint": "eslint ."
