@@ -40,7 +40,13 @@ jobs:
 
       - name: Get version
         id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        run: |
+          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=${TAG_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Update package version
+        run: |
+          npm version ${{ steps.get_version.outputs.VERSION }} --no-git-tag-version --allow-same-version
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
