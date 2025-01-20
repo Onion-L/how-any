@@ -7,6 +7,7 @@ import { Visitor } from '@swc/core/Visitor'
 import chalk from 'chalk'
 import { Command } from 'commander'
 import { getTsFiles } from './fg'
+import { parseSfc } from './sfc'
 
 const program = new Command()
 
@@ -14,7 +15,7 @@ program
   .version('1.0.0')
   .description('A CLI tool to detect the use of the `any` type in a TypeScript project')
   .option('-d, --dir <dir>', 'Input directory')
-  // TODO .option('-t, --type <type>', 'Input project type')
+  .option('-t, --type <type>', 'Input project type')
   .action(async (options) => {
     const files = await getTsFiles(options.dir, options.type)
     const { default: boxen } = await import('boxen')
@@ -80,7 +81,11 @@ class AnyTypeVisitor extends Visitor {
 
 export async function getAnyTypeRate(file: string): Promise<number> {
   const content = fs.readFileSync(file, 'utf-8')
-  const ast = await parse(content, {
+  let scriptContent = content
+  if (file.endsWith('.vue')) {
+    scriptContent = await parseSfc(content)
+  }
+  const ast = await parse(scriptContent, {
     syntax: 'typescript',
     tsx: true,
   })
